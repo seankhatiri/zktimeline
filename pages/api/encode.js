@@ -1,6 +1,4 @@
 // pages/api/encode.js
-import fetch from 'node-fetch';
-
 export async function encodeText(text) {
   const API_URL = "https://api-inference.huggingface.co/models/BAAI/bge-large-en-v1.5";
   const headers = {
