@@ -1,45 +1,43 @@
-// pages/index.js
-import { useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from "react";
+import NavBar from "../components/Header";
+import {
+  Box,
+  VStack,
+  Textarea,
+  Button,
 
-export default function Home() {
-  const [text, setText] = useState('');
-  const [encodedText, setEncodedText] = useState(null);
-  const [loading, setLoading] = useState(false);
+} from "@chakra-ui/react";
+import Header from "../components/Header";
 
-  const handleEncodeText = async () => {
-    setLoading(true);
-    console.log("Encoding text...");
-    try {
-      const response = await fetch('/api/encode', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(text),
-      });
+const Home = () => {
+    const [text, setText] = useState('');
 
-      const data = await response.json();
-      setEncodedText(JSON.stringify(data, null, 2));
-    } catch (error) {
-      console.error("Failed to encode text:", error);
-      setEncodedText("Error in encoding text.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    return (
+        <>
+          <Header />
+          <VStack spacing={10}>
+            <Box paddingTop="40px" width="70%">
+                <Textarea 
+                height="200px"
+                placeholder="Start writing to see the magic ..., then go to Text Encoding, finally go to the Timeline from top menu" 
+                value={text} 
+                onChange={(e) => setText(e.target.value)}
+                />
+            </Box>
+            <Box 
+                border="1px solid purple" 
+                margin="20px"
+                padding="20px" 
+                width="70%" 
+                overflowY="auto" 
+                maxHeight="900px"
+                height="700px"
+            >
+                {text}
+            </Box>
+        </VStack>
+        </>
+    );
+};
 
-  return (
-    <div>
-      <input
-        type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Enter text to encode"
-      />
-      <button onClick={handleEncodeText} disabled={loading}>
-        {loading ? 'Encoding...' : 'Encode Text'}
-      </button>
-      <pre>{encodedText}</pre>
-    </div>
-  );
-}
+export default Home;
