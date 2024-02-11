@@ -10,7 +10,7 @@ export async function encodeText(text) {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify({ text }),
+      body: JSON.stringify(text),
     });
 
     if (!response.ok) {
