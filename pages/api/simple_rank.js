@@ -25,8 +25,13 @@ export default async function handler(req, res) {
     }))
 
     const k = 2; // top-k
-    const topKTweetIds = await ranker.rankTweets(userTweets, allTweets, k);
-    const topTweets = topKTweetIds.map(id => allTweets.find(tweet => tweet.id === id));
-
-    res.status(200).json(topTweets.slice(0, k));
+    try {
+        const topKTweetIds = await ranker.rankTweets(userTweetsSimple, allTweetsSimple, k);
+        const topTweets = topKTweetIds.map(id => allTweets.find(tweet => tweet.id === id));
+        res.status(200).json(topTweets.slice(0, k));
+    } 
+    catch (e) {
+        console.log(e)
+        res.status(500).json({ error: "Error in contract call" });
+    }
 }
