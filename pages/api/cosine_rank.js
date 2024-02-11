@@ -20,8 +20,8 @@ export default async function handler(req, res) {
     const encodedUserTweets = await encodeText(userTweetsConcat);
 
     const encodedAllTweets = await Promise.all(allTweets.map(async (tweet) => {
-        const encodedTweet = await encodeText(tweet.body);
-        return encodedTweet;
+        const encodedAllTweet = await encodeText(tweet.body);
+        return encodedAllTweet;
     }));
     
 

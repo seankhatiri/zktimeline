@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 
     const k = 2; // top-k
     const topKTweetIds = await ranker.rankTweets(userTweets, allTweets, k);
-    const topTweets = topKTweetIds.map(id => allTweetsSimple.find(tweet => tweet.id === id));
+    const topTweets = topKTweetIds.map(id => allTweets.find(tweet => tweet.id === id));
 
     res.status(200).json(topTweets.slice(0, k));
 }

@@ -74,7 +74,7 @@ export default function Timeline() {
             onChange={(e) => setUserTweets(e.target.value)}
             />
             <Button colorScheme="purple" onClick={handleRanker} marginTop="20px" isLoading={loading}>
-            Encode text
+            Rank tweets
             </Button>
         </Box>
         <Box 
