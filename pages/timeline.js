@@ -25,7 +25,7 @@ export default function Timeline() {
     setLoading(true);
     console.log("generating ranking...");
     try {
-      const response = await fetch('/api/ranker', {
+      const response = await fetch('/api/cosine_rank', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -50,7 +50,8 @@ export default function Timeline() {
             <Textarea 
             height="200px"
             placeholder="Write the list of all tweets like: [{'tag': 'news', 'body': 'When is US election?'}, 
-                ..., {'tag': 'sport', 'body': 'Who won the final Grand Slam men's tennis'}]" 
+                ..., {'tag': 'sport', 'body': 'Who won the final Grand Slam men's tennis'}]. 
+                make sure to use double quote instead of single qoute" 
             value={allTweets} 
             onChange={(e) => setAllTweets(e.target.value)}
             />
@@ -58,7 +59,7 @@ export default function Timeline() {
         <Box paddingTop="10px" width="70%">
             <Textarea 
             height="100px"
-            placeholder="Write the list of your tweets like: [{}, ..., {}]" 
+            placeholder="Write the list of your tweets with the same data structure as above" 
             value={userTweets} 
             onChange={(e) => setUserTweets(e.target.value)}
             />
