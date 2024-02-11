@@ -11,12 +11,12 @@ export function simple_ranker_abi() {
                             "type": "uint256"
                         },
                         {
-                            "internalType": "enum Ranker.Category",
+                            "internalType": "enum CategoryRanker.Category",
                             "name": "category",
                             "type": "uint8"
                         }
                     ],
-                    "internalType": "struct Ranker.Tweet[]",
+                    "internalType": "struct CategoryRanker.Tweet[]",
                     "name": "userTweets",
                     "type": "tuple[]"
                 },
@@ -28,12 +28,12 @@ export function simple_ranker_abi() {
                             "type": "uint256"
                         },
                         {
-                            "internalType": "enum Ranker.Category",
+                            "internalType": "enum CategoryRanker.Category",
                             "name": "category",
                             "type": "uint8"
                         }
                     ],
-                    "internalType": "struct Ranker.Tweet[]",
+                    "internalType": "struct CategoryRanker.Tweet[]",
                     "name": "currentTweets",
                     "type": "tuple[]"
                 },
@@ -58,7 +58,7 @@ export function simple_ranker_abi() {
 }
 
 export function simple_ranker_contract_address() {
-    return "0x"
+    return "0x797A4EE4BC42B5b360E8C0fE05997a1514e3974e"
 }
 
 export function cosine_ranker_abi() {
@@ -66,5 +66,5 @@ export function cosine_ranker_abi() {
 }
 
 export function cosine_ranker_contract_address() {
-    return "0x"
+    return "0x7254f6ce08b444205F48AcF1e741afDcecd13929"
 }
