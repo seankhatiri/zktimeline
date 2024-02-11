@@ -12,6 +12,7 @@ import {
   Textarea,
   Button,
   VStack,
+  Select
 } from "@chakra-ui/react";
 import Header from "../components/Header";
 
@@ -19,13 +20,14 @@ export default function Timeline() {
   const [allTweets, setAllTweets] = useState('');
   const [userTweets, setUserTweets] = useState('');
   const [topK, setTopK] = useState(null);
+  const [rankerType, setRankerType] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleRanker = async () => {
     setLoading(true);
     console.log("generating ranking...");
     try {
-      const response = await fetch('/api/cosine_rank', {
+      const response = await fetch(`/api/${rankerType}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,15 +44,23 @@ export default function Timeline() {
     }
   };
 
+  const handleRankerType = (e) => {
+    setRankerType(e.target.value);
+  }
+
   return (
     <>
     <Header />
     <VStack>
         <Box paddingTop="40px" width="70%">
+        <Select placeholder='Select Ranker' paddingBottom="10px" onChange={handleRankerType} defaultValue='simple_ranker'>
+            <option value='simple_rank'>Simple Ranker</option>
+            <option value='cosine_rank'>Advance Ranker</option>
+        </Select>
             <Textarea 
             height="200px"
-            placeholder="Write the list of all tweets like: [{'tag': 'news', 'body': 'When is US election?'}, 
-                ..., {'tag': 'sport', 'body': 'Who won the final Grand Slam men's tennis'}]. 
+            placeholder="Write the list of all tweets like: [{'id': 0, 'category': 1, 'body': 'When is US election?'}, 
+                ..., {'id': 1, 'category': '2', 'body': 'Who won the final Grand Slam men's tennis'}]. 
                 make sure to use double quote instead of single qoute" 
             value={allTweets} 
             onChange={(e) => setAllTweets(e.target.value)}
@@ -63,7 +73,7 @@ export default function Timeline() {
             value={userTweets} 
             onChange={(e) => setUserTweets(e.target.value)}
             />
-            <Button colorScheme="purple" onClick={handleRanker} marginTop="20px">
+            <Button colorScheme="purple" onClick={handleRanker} marginTop="20px" isLoading={loading}>
             Encode text
             </Button>
         </Box>

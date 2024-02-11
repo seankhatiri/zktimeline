@@ -53,7 +53,7 @@ export default function Encoder() {
             value={text} 
             onChange={(e) => setText(e.target.value)}
             />
-            <Button colorScheme="purple" onClick={handleEncodeText} marginTop="10px">
+            <Button colorScheme="purple" onClick={handleEncodeText} marginTop="10px" isLoading={loading}>
             Encode text
             </Button>
         </Box>
