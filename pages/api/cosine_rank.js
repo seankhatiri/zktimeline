@@ -17,17 +17,25 @@ export default async function handler(req, res) {
 
     const { userTweets, allTweets } = req.body;
     const userTweetsConcat = userTweets.map(tweet => tweet.body).join(" ");
+    // TODO: Update contract considering 1024 as len of encoded tweets
     const encodedUserTweets = await encodeText(userTweetsConcat);
+    // TODO: we need to consider float type in the contract
+    const encodedUserTweetsInt = encodedUserTweets.map(x => Math.abs(parseInt(x*1000)));
 
-    const encodedAllTweets = await Promise.all(allTweets.map(async (tweet) => {
-        const encodedAllTweet = await encodeText(tweet.body);
-        return encodedAllTweet;
+    const encodedTweetsInt = await Promise.all(allTweets.map(async (tweet) => {
+        const encodedTweet = await encodeText(tweet.body);
+        const encodedTweetInt = encodedTweet.map(x => Math.abs(parseInt(x*1000)));
+        return encodedTweetInt.slice(0, 768);
     }));
     
+    // const encodedUserTweetsInt = [Array(768).fill(1)]
+    // const encodedTweetsInt = [Array(768).fill(1), Array(768).fill(1)]
 
     const k = 2; // top-k
-    const topKTweetIdxs = await ranker.findTopKSimilar(encodedAllTweets, encodedUserTweets, k);
+    const topKTweetIdxs = await ranker.findTopKSimilar(encodedTweetsInt, [encodedUserTweetsInt.slice(0, 768)], k);
+    console.log(topKTweetIdxs);
     const topTweets = topKTweetIdxs.map(idx => allTweets[idx]);
 
     res.status(200).json(topTweets.slice(0, k));
+    // res.status(200).json("hello");
 }

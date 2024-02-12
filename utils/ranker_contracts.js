@@ -62,9 +62,40 @@ export function simple_ranker_contract_address() {
 }
 
 export function cosine_ranker_abi() {
-    return []
+    return [
+        {
+            "inputs": [
+                {
+                    "internalType": "int256[768][]",
+                    "name": "allTweets",
+                    "type": "int256[768][]"
+                },
+                {
+                    "internalType": "int256[768][]",
+                    "name": "userTweets",
+                    "type": "int256[768][]"
+                },
+                {
+                    "internalType": "uint256",
+                    "name": "k",
+                    "type": "uint256"
+                }
+            ],
+            "name": "findTopKSimilar",
+            "outputs": [
+                {
+                    "internalType": "uint256[]",
+                    "name": "",
+                    "type": "uint256[]"
+                }
+            ],
+            "stateMutability": "pure",
+            "type": "function"
+        }
+    ]
 }
 
 export function cosine_ranker_contract_address() {
-    return ""
+    // return "0x7254f6ce08b444205F48AcF1e741afDcecd13929"
+    return "0x5E575884eb3cB7a3fBA2107eaA7993A7711d2452"
 }
