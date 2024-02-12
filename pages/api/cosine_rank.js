@@ -1,5 +1,5 @@
 // pages/api/cosine_rank.js
-import { ethers } from "ethers";
+import { ethers, JsonRpcProvider } from "ethers";
 import { cosine_ranker_abi } from "@/utils/ranker_contracts";
 import { cosine_ranker_contract_address } from "@/utils/ranker_contracts";
 import { encodeText } from "./encode";
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
         return res.status(405).end('Method Not Allowed');
     }
 
-    const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL);
+    const provider = new JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL);
     const signer = new ethers.Wallet(process.env.WALLET_PRIVATE_KEY, provider);
     const contractAddress = cosine_ranker_contract_address();
     const contractABI = cosine_ranker_abi();

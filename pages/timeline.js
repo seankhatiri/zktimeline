@@ -55,7 +55,7 @@ export default function Timeline() {
         <Box paddingTop="40px" width="70%">
         <Select placeholder='Select Ranker' paddingBottom="10px" onChange={handleRankerType} defaultValue='simple_ranker'>
             <option value='simple_rank'>Simple Ranker</option>
-            <option value='cosine_rank'>Advance Ranker</option>
+            <option value='cosine_rank_temp'>Advance Ranker</option>
         </Select>
             <Textarea 
             height="200px"
