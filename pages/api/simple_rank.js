@@ -15,11 +15,11 @@ export default async function handler(req, res) {
     const ranker = new ethers.Contract(contractAddress, contractABI, signer);
 
     const { userTweets, allTweets } = req.body;
-    userTweetsSimple = userTweets.map(tweet => ({
+    const userTweetsSimple = userTweets.map(tweet => ({
         id: tweet.id,
         category: tweet.category
     }))
-    allTweetsSimple = allTweets.map(tweet => ({
+    const allTweetsSimple = allTweets.map(tweet => ({
         id: tweet.id,
         category: tweet.category
     }))
@@ -27,8 +27,8 @@ export default async function handler(req, res) {
     const k = 2; // top-k
     try {
         const topKTweetIds = await ranker.rankTweets(userTweetsSimple, allTweetsSimple, k);
-        const topTweets = topKTweetIds.map(id => allTweets.find(tweet => tweet.id === id));
-        res.status(200).json(topTweets.slice(0, k));
+        const topKTweets = topKTweetIds.map(id => allTweets.find(tweet => tweet.id === Number(id)));
+        res.status(200).json(topKTweets);
     } 
     catch (e) {
         console.log(e)

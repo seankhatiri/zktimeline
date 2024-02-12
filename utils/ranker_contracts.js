@@ -58,7 +58,7 @@ export function simple_ranker_abi() {
 }
 
 export function simple_ranker_contract_address() {
-    return "0x797A4EE4BC42B5b360E8C0fE05997a1514e3974e"
+    return "0x5050Bc76Cf130Efd0B0186eca8B0b75F4CcEC62d"
 }
 
 export function cosine_ranker_abi() {
@@ -66,5 +66,5 @@ export function cosine_ranker_abi() {
 }
 
 export function cosine_ranker_contract_address() {
-    return "0x7254f6ce08b444205F48AcF1e741afDcecd13929"
+    return ""
 }
