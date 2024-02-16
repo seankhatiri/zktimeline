@@ -17,7 +17,7 @@ import {
 import Header from "../components/Header";
 
 export default function Timeline() {
-  const [allTweets, setAllTweets] = useState('');
+  const [allTweets, setAllTweets] = useState([]);
   const [userTweets, setUserTweets] = useState('');
   const [topK, setTopK] = useState(null);
   const [rankerType, setRankerType] = useState(null);
@@ -58,15 +58,51 @@ export default function Timeline() {
             <option value='cosine_rank'>scroll AI Ranker</option>
             <option value='cosine_rank_temp'>centralized AI Ranker</option>
         </Select>
-            <Textarea 
-            height="200px"
-            placeholder="Write the list of all tweets like: [{'id': 0, 'category': 1, 'body': 'When is US election?'}, 
-                ..., {'id': 1, 'category': '2', 'body': 'Who won the final Grand Slam men's tennis'}]. 
-                make sure to use double quote instead of single qoute" 
-            value={allTweets} 
-            onChange={(e) => setAllTweets(e.target.value)}
-            />
         </Box>
+
+        <Box paddingTop="40px" width="70%">
+          {Array.isArray(allTweets) &&
+              allTweets.map((tweet, index) => (
+                  <Flex key={index} marginBottom="10px">
+                      <Textarea
+                          height="30px"
+                          placeholder={`Tweet Body ${index + 1}`}
+                          value={tweet.body || ''}
+                          onChange={(e) => {
+                              const newTweets = [...allTweets];
+                              newTweets[index] = { ...newTweets[index], body: e.target.value };
+                              setAllTweets(newTweets);
+                          }}
+                      />
+                      <Select
+                          placeholder="Select Category"
+                          marginLeft="10px"
+                          value={tweet.category || ''}
+                          onChange={(e) => {
+                              const newTweets = [...allTweets];
+                              newTweets[index] = { ...newTweets[index], category: e.target.value };
+                              setAllTweets(newTweets);
+                          }}
+                      >
+                          {}
+                          <option value="category1">Category 1</option>
+                          <option value="category2">Category 2</option>
+                          {}
+                      </Select>
+                      {index === allTweets.length - 1 && (
+                          <Button
+                              colorScheme="teal"
+                              marginLeft="10px"
+                              onClick={() => setAllTweets([...allTweets, {}])}
+                          >
+                              +
+                          </Button>
+                      )}
+                  </Flex>
+              ))}
+      </Box>
+
+
         <Box paddingTop="10px" width="70%">
             <Textarea 
             height="100px"
