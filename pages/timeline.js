@@ -54,7 +54,7 @@ export default function Timeline() {
     <VStack>
         <Box paddingTop="40px" width="70%">
         <Select placeholder='Select Ranker' paddingBottom="10px" onChange={handleRankerType} defaultValue='simple_ranker'>
-            <option value='simple_rank'>Simple Ranker</option>
+            <option value='simple_rank_v2'>Simple Ranker</option>
             <option value='cosine_rank'>scroll AI Ranker</option>
             <option value='cosine_rank_temp'>centralized AI Ranker</option>
         </Select>
