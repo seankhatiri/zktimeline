@@ -36,7 +36,7 @@ export default function Encoder() {
       setEncodedText(JSON.stringify(data, null, 2));
     } catch (error) {
       console.error("Failed to encode text:", error);
-      setEncodedText("Error in encoding text.");
+      setEncodedText("Error in encoding text, please weight for 50 seconds, we are laoding AI models behind the scnene ...");
     } finally {
       setLoading(false);
     }

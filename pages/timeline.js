@@ -38,7 +38,7 @@ export default function Timeline() {
       setTopK(JSON.stringify(data, null, 2));
     } catch (error) {
       console.error("Failed to rank tweets:", error);
-      setTopK("Error in ranking tweets.");
+      setTopK("Error in ranking tweets, please weight for 50 seconds, we are laoding AI models behind the scnene ...");
     } finally {
       setLoading(false);
     }
